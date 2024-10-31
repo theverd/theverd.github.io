@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fizz/Fuze Afters | VERD</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background: linear-gradient(
+          145deg,
+          rgba(0, 0, 0, 0.97),
+          rgba(10, 10, 10, 0.97),
+          rgba(0, 0, 0, 0.97)
+        );
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .glass-card {
+        background: rgba(18, 18, 18, 0.98);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
+      }
+
+      .bg-verd {
+        background-color: #00dc82;
+      }
+
+      .text-verd {
+        color: #00dc82;
+      }
+
+      .progress-bg {
+        background: rgba(0, 220, 130, 0.1);
+      }
+
+      .progress-fill {
+        background: #00dc82;
+        transition: width 0.5s ease;
+      }
+
+      .hover-scale {
+        transition: transform 0.2s ease;
+      }
+
+      .hover-scale:hover {
+        transform: scale(1.02);
+      }
+
+      .dark-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .dark-input:focus {
+        outline: none;
+        border-color: #00dc82;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .dark-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .button-glow:hover {
+        box-shadow: 0 0 20px rgba(0, 220, 130, 0.2);
+      }
+
+      .devotion-level {
+        background: rgba(255, 255, 255, 0.05);
+        transition: all 0.2s ease;
+      }
+
+      .devotion-level:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(4px);
+      }
+
+      input[type="number"] {
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+      }
+
+      .sparkle {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: float 20s linear infinite;
+        opacity: 0.3;
+      }
+
+      .squiggle {
+        position: absolute;
+        pointer-events: none;
+        animation: float 15s linear infinite;
+        opacity: 0.2;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(30px, -50px) rotate(120deg);
+        }
+        66% {
+          transform: translate(-30px, 50px) rotate(240deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(360deg);
+        }
+      }
+
+      .background-effects {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center p-4">
+    <div class="background-effects">
+      <!-- Red Sparkles -->
+      <svg
+        width="100%"
+        height="100%"
+        class="sparkle"
+        style="left: 15%; top: 20%; animation-delay: 0s"
+      >
+        <circle cx="10" cy="10" r="10" fill="#FF4365" />
+      </svg>
+      <svg
+        width="100%"
+        height="100%"
+        class="sparkle"
+        style="left: 75%; top: 65%; animation-delay: -5s"
+      >
+        <circle cx="8" cy="8" r="8" fill="#FF4365" />
+      </svg>
+
+      <!-- Blue Squiggles -->
+      <svg
+        width="100%"
+        height="100%"
+        class="squiggle"
+        style="left: 25%; top: 40%; animation-delay: -3s"
+      >
+        <path
+          d="M0,10 Q15,-10 30,10 Q45,30 60,10"
+          stroke="#4361FF"
+          stroke-width="3"
+          fill="none"
+        />
+      </svg>
+      <svg
+        width="100%"
+        height="100%"
+        class="squiggle"
+        style="left: 60%; top: 80%; animation-delay: -8s"
+      >
+        <path
+          d="M0,10 Q15,-10 30,10 Q45,30 60,10"
+          stroke="#4361FF"
+          stroke-width="3"
+          fill="none"
+        />
+      </svg>
+
+      <!-- Yellow Sparks -->
+      <svg
+        width="100%"
+        height="100%"
+        class="sparkle"
+        style="left: 45%; top: 30%; animation-delay: -2s"
+      >
+        <polygon points="0,10 5,0 10,10 0,5 10,5" fill="#FFD743" />
+      </svg>
+      <svg
+        width="100%"
+        height="100%"
+        class="sparkle"
+        style="left: 85%; top: 15%; animation-delay: -7s"
+      >
+        <polygon points="0,10 5,0 10,10 0,5 10,5" fill="#FFD743" />
+      </svg>
+
+      <!-- Additional Elements -->
+      <svg
+        width="100%"
+        height="100%"
+        class="squiggle"
+        style="left: 35%; top: 70%; animation-delay: -4s"
+      >
+        <path
+          d="M0,0 Q20,20 40,0 Q60,-20 80,0"
+          stroke="#FF4365"
+          stroke-width="2"
+          fill="none"
+        />
+      </svg>
+      <svg
+        width="100%"
+        height="100%"
+        class="sparkle"
+        style="left: 65%; top: 25%; animation-delay: -6s"
+      >
+        <circle cx="6" cy="6" r="6" fill="#4361FF" />
+      </svg>
+      <svg
+        width="100%"
+        height="100%"
+        class="squiggle"
+        style="left: 15%; top: 85%; animation-delay: -9s"
+      >
+        <path
+          d="M0,10 Q30,-20 60,10"
+          stroke="#FFD743"
+          stroke-width="2"
+          fill="none"
+        />
+      </svg>
+    </div>
+    <div class="glass-card rounded-3xl w-full max-w-lg mx-auto p-8 hover-scale">
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <div class="text-verd font-medium tracking-wide">What's the VERD??</div>
+        <h1 class="text-2xl font-bold mb-1 text-white">Fizz/Fuze Afters</h1>
+        <p class="text-gray-400">To Mvch Fvtvre | Dense Minimal Techno</p>
+      </div>
+
+      <!-- Milestone Status -->
+      <div class="bg-white/5 rounded-xl p-4 mb-8">
+        <div class="text-center">
+          <div class="text-lg font-semibold mb-2 text-white">
+            Status: Afterparty Pending...
+          </div>
+          <p class="text-gray-400 text-sm mb-4">
+            The night continues when 40 people are in. Get on the list early!
+          </p>
+        </div>
+        <div class="h-3 rounded-full progress-bg mb-2">
+          <div
+            class="progress-fill h-full rounded-full"
+            style="width: 35%"
+          ></div>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-gray-300">15 on the list</span>
+          <span class="text-verd font-medium">25 spots left!</span>
+        </div>
+      </div>
+
+      <!-- Event Details -->
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="text-center p-4 bg-white/5 rounded-xl hover-scale">
+          <div class="text-gray-400 text-sm mb-1">Start Time</div>
+          <div class="text-white font-medium">After Main Event</div>
+          <div class="text-sm text-verd font-medium">2AM - Sunrise</div>
+        </div>
+        <div class="text-center p-4 bg-white/5 rounded-xl hover-scale">
+          <div class="text-gray-400 text-sm mb-1">Location</div>
+          <div class="text-white font-medium">NONAME PHL</div>
+          <div class="text-sm text-verd font-medium">Private Access</div>
+        </div>
+      </div>
+
+      <!-- Unlocks -->
+      <div class="text-center p-4 bg-white/5 rounded-xl mb-8">
+        <div class="text-white font-medium mb-2">When We Hit 40 People:</div>
+        <div class="text-sm text-gray-400">
+          <div class="mt-2 grid grid-cols-2 gap-2 text-left">
+            <div class="flex items-center">
+              <span class="text-verd mr-2">✓</span> Private Venue Access
+            </div>
+            <div class="flex items-center">
+              <span class="text-verd mr-2">✓</span> Elixir Bar
+            </div>
+            <div class="flex items-center">
+              <span class="text-verd mr-2">✓</span> Extended DJ Sets
+            </div>
+            <div class="flex items-center">
+              <span class="text-verd mr-2">✓</span> Sunrise Finale
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Updated Devotion Section -->
+      <div class="mb-8">
+        <div class="text-center mb-4">
+          <div class="text-lg font-medium mb-1 text-white">
+            Level of Devotion
+          </div>
+          <p class="text-gray-400 text-sm">
+            Show how deep you're in | Choose your vibe
+          </p>
+        </div>
+
+        <!-- Devotion Levels Grid -->
+        <div class="grid grid-cols-2 gap-3">
+          <button class="text-left devotion-level p-4 rounded-xl transition">
+            <div class="flex justify-between items-center">
+              <span class="font-medium text-white">Broke AF</span>
+              <span class="text-verd font-bold">$10</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">We got you this time..</div>
+          </button>
+
+          <button class="text-left devotion-level p-4 rounded-xl transition">
+            <div class="flex justify-between items-center">
+              <span class="font-medium text-white">Early Bird</span>
+              <span class="text-verd font-bold">$15</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">
+              Sells out when we feel like it!
+            </div>
+          </button>
+
+          <button class="text-left devotion-level p-4 rounded-xl transition">
+            <div class="flex justify-between items-center">
+              <span class="font-medium text-white">Average Price</span>
+              <span class="text-verd font-bold">$20</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">
+              Normal people select this.
+            </div>
+          </button>
+
+          <button class="text-left devotion-level p-4 rounded-xl transition">
+            <div class="flex justify-between items-center">
+              <span class="font-medium text-white">Energy Maker</span>
+              <span class="text-verd font-bold">$30</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">Sweaty Dancers Only.</div>
+          </button>
+
+          <button class="text-left devotion-level p-4 rounded-xl transition">
+            <div class="flex justify-between items-center">
+              <span class="font-medium text-white">Vibe Creator</span>
+              <span class="text-verd font-bold">$50</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">
+              Name written on our arm.
+            </div>
+          </button>
+
+          <button
+            class="text-left devotion-level p-4 rounded-xl transition bg-white/10"
+          >
+            <div class="flex justify-between items-center">
+              <span class="font-medium text-verd">Legend Status</span>
+              <span class="text-verd font-bold">$100</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">
+              VIP treatment. Song Request Rights.
+            </div>
+          </button>
+        </div>
+
+        <!-- Devotion Info -->
+        <div class="mt-4 text-center text-sm text-gray-500">
+          No payment required now | Just show us you're committed
+          <div class="mt-1">Payment link sent when we hit 40 people</div>
+        </div>
+      </div>
+
+      <!-- Sign Up Form -->
+      <form class="space-y-4">
+        <input
+          type="text"
+          placeholder="Your name"
+          class="w-full p-4 rounded-xl dark-input"
+        />
+        <input
+          type="tel"
+          placeholder="Phone number"
+          class="w-full p-4 rounded-xl dark-input"
+        />
+        <input
+          type="text"
+          placeholder="Referral code (optional)"
+          class="w-full p-4 rounded-xl dark-input"
+        />
+        <button
+          type="submit"
+          class="w-full bg-verd text-black font-bold p-4 rounded-xl hover:bg-opacity-90 transition button-glow"
+        >
+          Get on the List
+        </button>
+      </form>
+
+      <!-- Referral Info -->
+      <div class="mt-6 text-center">
+        <div class="text-white font-medium mb-2">
+          Make the afterparty happen!
+        </div>
+        <div class="text-gray-400 text-sm">
+          Get your crew on board and save $3 per friend
+          <div class="mt-1 text-verd font-medium">
+            Only 25 more needed to confirm!
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-8 text-center text-sm text-gray-500">
+        No payment required now | Just show us you're committed
+        <div class="mt-1">Payment link sent when we hit 40 people</div>
+      </div>
+    </div>
+    <script>
+      // Add hover effects for devotion levels
+      document.querySelectorAll(".devotion-level").forEach((button) => {
+        button.addEventListener("mouseenter", () => {
+          button.classList.add("bg-white/10");
+        });
+        button.addEventListener("mouseleave", () => {
+          if (!button.classList.contains("bg-white/10")) {
+            button.classList.remove("bg-white/10");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
