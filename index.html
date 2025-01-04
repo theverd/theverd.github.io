@@ -1,441 +1,633 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Fizz/Fuze Afters | VERD</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread the Verd - Next-Gen Event Management</title>
     <style>
-      body {
-        background: linear-gradient(
-          145deg,
-          rgba(0, 0, 0, 0.97),
-          rgba(10, 10, 10, 0.97),
-          rgba(0, 0, 0, 0.97)
-        );
-        min-height: 100vh;
-        position: relative;
-        overflow-x: hidden;
-      }
-
-      .glass-card {
-        background: rgba(18, 18, 18, 0.98);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
-          0 0 0 1px rgba(255, 255, 255, 0.05);
-      }
-
-      .bg-verd {
-        background-color: #00dc82;
-      }
-
-      .text-verd {
-        color: #00dc82;
-      }
-
-      .progress-bg {
-        background: rgba(0, 220, 130, 0.1);
-      }
-
-      .progress-fill {
-        background: #00dc82;
-        transition: width 0.5s ease;
-      }
-
-      .hover-scale {
-        transition: transform 0.2s ease;
-      }
-
-      .hover-scale:hover {
-        transform: scale(1.02);
-      }
-
-      .dark-input {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: white;
-      }
-
-      .dark-input:focus {
-        outline: none;
-        border-color: #00dc82;
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .dark-input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
-      }
-
-      .button-glow:hover {
-        box-shadow: 0 0 20px rgba(0, 220, 130, 0.2);
-      }
-
-      .devotion-level {
-        background: rgba(255, 255, 255, 0.05);
-        transition: all 0.2s ease;
-      }
-
-      .devotion-level:hover {
-        background: rgba(255, 255, 255, 0.08);
-        transform: translateX(4px);
-      }
-
-      input[type="number"] {
-        background: rgba(255, 255, 255, 0.05);
-        color: white;
-      }
-
-      .sparkle {
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        animation: float 20s linear infinite;
-        opacity: 0.3;
-      }
-
-      .squiggle {
-        position: absolute;
-        pointer-events: none;
-        animation: float 15s linear infinite;
-        opacity: 0.2;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translate(0, 0) rotate(0deg);
+        /* Modern reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
-        33% {
-          transform: translate(30px, -50px) rotate(120deg);
-        }
-        66% {
-          transform: translate(-30px, 50px) rotate(240deg);
-        }
-        100% {
-          transform: translate(0, 0) rotate(360deg);
-        }
-      }
 
-      .background-effects {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: -1;
-      }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.5;
+            color: #e0e0e0;
+            background: #121212;
+        }
+
+        /* Utility classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .accent-text {
+            background: linear-gradient(45deg, #00ff9d, #00b36b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff9d;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00ff9d;
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, #00ff9d22 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #00ff9d;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Features section */
+        .features {
+            padding: 5rem 2rem;
+            background: #1a1a1a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #00ff9d;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #242424;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff9d;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00ff9d;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+        }
+
+        /* Demo section */
+        .demo {
+            padding: 5rem 2rem;
+            background: #121212;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-card {
+            background: #242424;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #333;
+        }
+
+        .demo-content {
+            padding: 1.5rem;
+        }
+
+        .demo-content h3 {
+            color: #00ff9d;
+            margin-bottom: 1rem;
+        }
+
+        /* Statistics section */
+        .stats {
+            padding: 5rem 2rem;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: #242424;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .stat-card h2 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: #00ff9d;
+        }
+
+        .stat-card p {
+            color: #b0b0b0;
+            font-size: 1.2rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: #121212;
+        }
+
+        .testimonial-card {
+            background: #242424;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid #333;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+        }
+
+        .testimonial-author {
+            color: #00ff9d;
+            font-weight: 600;
+        }
+
+        /* CTA section */
+        .cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: #1a1a1a;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, #00ff9d11 0%, transparent 70%);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #00ff9d;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            background: #00ff9d;
+            color: #121212;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00ff9d55;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Additional styles for the form */
+        .contact-form {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #242424;
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff9d;
+            box-shadow: 0 0 0 2px #00ff9d33;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+        }
+        
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300ff9d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        /* Telegram mockup styles */
+        .telegram-mockup {
+            background: #1f1f1f;
+            border-radius: 20px 20px 0 0;
+            padding: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .tg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1rem;
+        }
+
+        .tg-title {
+            font-weight: 600;
+            color: #00ff9d;
+        }
+
+        .tg-time {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .tg-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tg-topic {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .tg-topic.active {
+            background: #00ff9d33;
+            color: #00ff9d;
+        }
+
+        .tg-message {
+            background: #2a2a2a;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: relative;
+            max-width: 80%;
+        }
+
+        .tg-message.received {
+            margin-right: auto;
+            background: #333;
+        }
+
+        .tg-message.sent {
+            margin-left: auto;
+            background: #00ff9d22;
+            color: #00ff9d;
+        }
+
+        .qr-preview {
+            width: 150px;
+            height: 150px;
+            background: #00ff9d;
+            margin: 1rem 0;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .qr-preview::after {
+            content: 'QR Code';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-weight: 600;
+        }
     </style>
-  </head>
-  <body class="flex items-center justify-center p-4">
-    <div class="background-effects">
-      <!-- Red Sparkles -->
-      <svg
-        width="100%"
-        height="100%"
-        class="sparkle"
-        style="left: 15%; top: 20%; animation-delay: 0s"
-      >
-        <circle cx="10" cy="10" r="10" fill="#FF4365" />
-      </svg>
-      <svg
-        width="100%"
-        height="100%"
-        class="sparkle"
-        style="left: 75%; top: 65%; animation-delay: -5s"
-      >
-        <circle cx="8" cy="8" r="8" fill="#FF4365" />
-      </svg>
-
-      <!-- Blue Squiggles -->
-      <svg
-        width="100%"
-        height="100%"
-        class="squiggle"
-        style="left: 25%; top: 40%; animation-delay: -3s"
-      >
-        <path
-          d="M0,10 Q15,-10 30,10 Q45,30 60,10"
-          stroke="#4361FF"
-          stroke-width="3"
-          fill="none"
-        />
-      </svg>
-      <svg
-        width="100%"
-        height="100%"
-        class="squiggle"
-        style="left: 60%; top: 80%; animation-delay: -8s"
-      >
-        <path
-          d="M0,10 Q15,-10 30,10 Q45,30 60,10"
-          stroke="#4361FF"
-          stroke-width="3"
-          fill="none"
-        />
-      </svg>
-
-      <!-- Yellow Sparks -->
-      <svg
-        width="100%"
-        height="100%"
-        class="sparkle"
-        style="left: 45%; top: 30%; animation-delay: -2s"
-      >
-        <polygon points="0,10 5,0 10,10 0,5 10,5" fill="#FFD743" />
-      </svg>
-      <svg
-        width="100%"
-        height="100%"
-        class="sparkle"
-        style="left: 85%; top: 15%; animation-delay: -7s"
-      >
-        <polygon points="0,10 5,0 10,10 0,5 10,5" fill="#FFD743" />
-      </svg>
-
-      <!-- Additional Elements -->
-      <svg
-        width="100%"
-        height="100%"
-        class="squiggle"
-        style="left: 35%; top: 70%; animation-delay: -4s"
-      >
-        <path
-          d="M0,0 Q20,20 40,0 Q60,-20 80,0"
-          stroke="#FF4365"
-          stroke-width="2"
-          fill="none"
-        />
-      </svg>
-      <svg
-        width="100%"
-        height="100%"
-        class="sparkle"
-        style="left: 65%; top: 25%; animation-delay: -6s"
-      >
-        <circle cx="6" cy="6" r="6" fill="#4361FF" />
-      </svg>
-      <svg
-        width="100%"
-        height="100%"
-        class="squiggle"
-        style="left: 15%; top: 85%; animation-delay: -9s"
-      >
-        <path
-          d="M0,10 Q30,-20 60,10"
-          stroke="#FFD743"
-          stroke-width="2"
-          fill="none"
-        />
-      </svg>
-    </div>
-    <div class="glass-card rounded-3xl w-full max-w-lg mx-auto p-8 hover-scale">
-      <!-- Header -->
-      <div class="text-center mb-6">
-        <p class="text-gray-400">{Site Under Construction}</p>
-        <div class="text-verd font-medium tracking-wide">WHAT'S THE VERD??</div>
-        <h1 class="text-2xl font-bold mb-1 text-white">Crowdsourced Parties</h1>
-        <p class="text-gray-400">To Mvch Fvtvre | Dense Minimal Techno</p>
-        <p class="text-gray-400">RFLXTNS All Nite Long</p>
-        <p class="text-gray-400">DM @FizzFuze for more details</p>
-      </div>
-
-      <!-- Milestone Status -->
-      <div class="bg-white/5 rounded-xl p-4 mb-8">
-        <div class="text-center">
-          <div class="text-lg font-semibold mb-2 text-white">
-            Status: Event Pending...
-          </div>
-          <p class="text-gray-400 text-sm mb-4">
-            The night continues when 40 people are in. Get on the list early!
-          </p>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-logo">Spread the Verd</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#demo">Demo</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
         </div>
-        <div class="h-3 rounded-full progress-bg mb-2">
-          <div
-            class="progress-fill h-full rounded-full"
-            style="width: 35%"
-          ></div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <h1>Verd</h1>
+            <p>Revolutionizing Event Management Through Automation</p>
+            <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.8;">Streamline your events, build your community, and boost engagement - all through Telegram.</p>
         </div>
-        <div class="flex justify-between text-sm">
-          <span class="text-gray-300">15 on the list</span>
-          <span class="text-verd font-medium">25 spots left!</span>
+    </section>
+
+    <section id="features" class="features">
+        <h2 class="section-title">Why Choose Verd?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🎟️ Smart Check-ins</h3>
+                <p>Dynamic QR code system that adapts to your event needs. Support multiple ticket types, track real-time attendance, and manage capacity effortlessly. Eliminate queues and enhance the entry experience.</p>
+            </div>
+            <div class="feature-card">
+                <h3>👥 Community Growth</h3>
+                <p>Transform attendees into loyal community members with our innovative tier system. Reward participation, track engagement, and create exclusive experiences for your most dedicated supporters.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💬 Intelligent Chat Groups</h3>
+                <p>Automatically create and manage event-specific chat groups with organized topics. Foster connections through dedicated spaces for ride sharing, lost & found, song requests, and more.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🚪 Staff Empowerment</h3>
+                <p>Equip your team with powerful tools. Role-based access control, real-time communication, and instant decision-making capabilities keep your events running smoothly.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Data-Driven Insights</h3>
+                <p>Make informed decisions with comprehensive analytics. Track attendance patterns, monitor revenue streams, measure community engagement, and identify growth opportunities.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔐 Enhanced Security</h3>
+                <p>Multi-layer verification system for members and staff. Maintain exclusivity, prevent unauthorized access, and create a safe environment for your community.</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Event Details -->
-      <div class="grid grid-cols-2 gap-4 mb-6">
-        <div class="text-center p-4 bg-white/5 rounded-xl hover-scale">
-          <div class="text-gray-400 text-sm mb-1">Start Time</div>
-          <div class="text-white font-medium">After Main Event</div>
-          <div class="text-sm text-verd font-medium">2AM - Sunrise</div>
+    <section id="demo" class="demo">
+        <h2 class="section-title">See It In Action</h2>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="telegram-mockup">
+                    <div class="tg-header">
+                        <span class="tg-time">9:41</span>
+                        <span class="tg-title">Event Check-in</span>
+                    </div>
+                    <div class="tg-message received">
+                        Welcome to EDM Night! 🎵
+                        <div class="tg-time">20:30</div>
+                    </div>
+                    <div class="tg-message received">
+                        <div class="qr-preview"></div>
+                        Scan this QR code at the entrance
+                        <div class="tg-time">20:30</div>
+                    </div>
+                    <div class="tg-message sent">
+                        ✅ Check-in confirmed!
+                        <br>Entry type: VIP
+                        <br>Time: 21:15
+                        <div class="tg-time">21:15</div>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <h3>Seamless Check-ins</h3>
+                    <p>Quick QR code scanning for instant entry verification</p>
+                </div>
+            </div>
+            <div class="demo-card">
+                <div class="telegram-mockup">
+                    <div class="tg-header">
+                        <span class="tg-time">9:41</span>
+                        <span class="tg-title">EDM Night Chat</span>
+                    </div>
+                    <div class="tg-topics">
+                        <div class="tg-topic active">📢 Main Chat</div>
+                        <div class="tg-topic">🚗 Ride Share</div>
+                        <div class="tg-topic">🎵 Song Requests</div>
+                        <div class="tg-topic">🔍 Lost & Found</div>
+                    </div>
+                    <div class="tg-message received">
+                        Anyone heading from downtown? 🚗
+                        <div class="tg-time">20:15</div>
+                    </div>
+                    <div class="tg-message received">
+                        I can pick up 3 people! 🙋‍♂️
+                        <div class="tg-time">20:16</div>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <h3>Active Community</h3>
+                    <p>Organized chat groups with dedicated topics</p>
+                </div>
+            </div>
+            <div class="demo-card">
+                <div class="telegram-mockup">
+                    <div class="tg-header">
+                        <span class="tg-time">9:41</span>
+                        <span class="tg-title">Event Analytics</span>
+                    </div>
+                    <div class="tg-message received">
+                        📊 Event Summary:
+                        <br>• Attendance: 342/400
+                        <br>• VIP Entries: 45
+                        <br>• Peak Time: 22:30
+                        <br>• New Members: 28
+                        <div class="tg-time">23:45</div>
+                    </div>
+                    <div class="tg-message received">
+                        🏆 Top Community Members:
+                        <br>@alex_dj: 500 points
+                        <br>@sarah_v: 450 points
+                        <br>@mike_p: 400 points
+                        <div class="tg-time">23:46</div>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <h3>Real-time Analytics</h3>
+                    <p>Comprehensive insights at your fingertips</p>
+                </div>
+            </div>
         </div>
-        <div class="text-center p-4 bg-white/5 rounded-xl hover-scale">
-          <div class="text-gray-400 text-sm mb-1">Location</div>
-          <div class="text-white font-medium">NONAME PHL</div>
-          <div class="text-sm text-verd font-medium">Private Access</div>
+    </section>
+
+    <section class="stats">
+        <h2 class="section-title">Impact & Results</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h2>4.8x</h2>
+                <p>Faster Check-in Process</p>
+            </div>
+            <div class="stat-card">
+                <h2>89%</h2>
+                <p>Staff Time Saved</p>
+            </div>
+            <div class="stat-card">
+                <h2>67%</h2>
+                <p>Increased Return Rate</p>
+            </div>
+            <div class="stat-card">
+                <h2>2.5x</h2>
+                <p>Community Growth</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Unlocks -->
-      <div class="text-center p-4 bg-white/5 rounded-xl mb-8">
-        <div class="text-white font-medium mb-2">When We Hit 40 People:</div>
-        <div class="text-sm text-gray-400">
-          <div class="mt-2 grid grid-cols-2 gap-2 text-left">
-            <div class="flex items-center">
-              <span class="text-verd mr-2">✓</span> Private Venue Access
-            </div>
-            <div class="flex items-center">
-              <span class="text-verd mr-2">✓</span> Elixir Bar
-            </div>
-            <div class="flex items-center">
-              <span class="text-verd mr-2">✓</span> Extended DJ Sets
-            </div>
-            <div class="flex items-center">
-              <span class="text-verd mr-2">✓</span> Sunrise Finale
-            </div>
-          </div>
+    <section id="contact" class="cta">
+        <h2>Let's Discuss Your Events</h2>
+        <p style="font-size: 1.2rem; margin: 1rem 0;">Schedule a demo or request custom pricing</p>
+        <div class="form-container" style="max-width: 640px; margin: 2rem auto; background: #242424; padding: 1rem; border-radius: 20px; border: 1px solid #333; position: relative;">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf9HdHxFtpt3xpbVaqJzlVDLKXYkJh78finhpBVp7TpiMdDKQ/viewform?embedded=true" 
+                    width="100%" 
+                    height="1200" 
+                    style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: 100%; width: 100%; border: 0;">
+                Loading…
+            </iframe>
         </div>
-      </div>
-
-      <!-- Updated Devotion Section -->
-      <div class="mb-8">
-        <div class="text-center mb-4">
-          <div class="text-lg font-medium mb-1 text-white">
-            Level of Devotion
-          </div>
-          <p class="text-gray-400 text-sm">
-            Show how deep you're in | Choose your vibe
-          </p>
-        </div>
-
-        <!-- Devotion Levels Grid -->
-        <div class="grid grid-cols-2 gap-3">
-          <button class="text-left devotion-level p-4 rounded-xl transition">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-white">Broke AF</span>
-              <span class="text-verd font-bold">$10</span>
-            </div>
-            <div class="text-sm text-gray-400 mt-1">We got you this time..</div>
-          </button>
-
-          <button class="text-left devotion-level p-4 rounded-xl transition">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-white">Early Bird</span>
-              <span class="text-verd font-bold">$15</span>
-            </div>
-            <div class="text-sm text-gray-400 mt-1">
-              Sells out when we feel like it!
-            </div>
-          </button>
-
-          <button class="text-left devotion-level p-4 rounded-xl transition">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-white">Average Price</span>
-              <span class="text-verd font-bold">$20</span>
-            </div>
-            <div class="text-sm text-gray-400 mt-1">
-              Normal people select this.
-            </div>
-          </button>
-
-          <button class="text-left devotion-level p-4 rounded-xl transition">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-white">Energy Maker</span>
-              <span class="text-verd font-bold">$30</span>
-            </div>
-            <div class="text-sm text-gray-400 mt-1">Sweaty Dancers Only.</div>
-          </button>
-
-          <button class="text-left devotion-level p-4 rounded-xl transition">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-white">Vibe Creator</span>
-              <span class="text-verd font-bold">$50</span>
-            </div>
-            <div class="text-sm text-gray-400 mt-1">
-              Name written on our arm.
-            </div>
-          </button>
-
-          <button
-            class="text-left devotion-level p-4 rounded-xl transition bg-white/10"
-          >
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-verd">Legend Status</span>
-              <span class="text-verd font-bold">$100</span>
-            </div>
-            <div class="text-sm text-gray-400 mt-1">
-              VIP treatment. Song Request Rights.
-            </div>
-          </button>
-        </div>
-
-        <!-- Devotion Info -->
-        <div class="mt-4 text-center text-sm text-gray-500">
-          No payment required now | Just show us you're committed
-          <div class="mt-1">Payment link sent when we hit 40 people</div>
-        </div>
-      </div>
-
-      <!-- Sign Up Form -->
-      <form class="space-y-4">
-        <input
-          type="text"
-          placeholder="Your name"
-          class="w-full p-4 rounded-xl dark-input"
-        />
-        <input
-          type="tel"
-          placeholder="Phone number"
-          class="w-full p-4 rounded-xl dark-input"
-        />
-        <input
-          type="text"
-          placeholder="Referral code (optional)"
-          class="w-full p-4 rounded-xl dark-input"
-        />
-        <button
-          type="submit"
-          class="w-full bg-verd text-black font-bold p-4 rounded-xl hover:bg-opacity-90 transition button-glow"
-        >
-          Get on the List
-        </button>
-      </form>
-
-      <!-- Referral Info -->
-      <div class="mt-6 text-center">
-        <div class="text-white font-medium mb-2">
-          Make the afterparty happen!
-        </div>
-        <div class="text-gray-400 text-sm">
-          Get your crew on board and save $3 per friend
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="mt-8 text-center text-sm text-gray-500">
-        No payment required now | Just show us you're committed
-        <div class="mt-1">Payment link sent when we hit 40 people</div>
-      </div>
-            <div class="mt-6 text-center">
-                <div class="mt-1 text-verd font-medium">
-            VERD. COMING Q1 2025
-          </div>
-            </div>
-    </div>
-    <script>
-      // Add hover effects for devotion levels
-      document.querySelectorAll(".devotion-level").forEach((button) => {
-        button.addEventListener("mouseenter", () => {
-          button.classList.add("bg-white/10");
-        });
-        button.addEventListener("mouseleave", () => {
-          if (!button.classList.contains("bg-white/10")) {
-            button.classList.remove("bg-white/10");
-          }
-        });
-      });
-    </script>
-  </body>
-</html>
+        <style>
+            .form-container {
+                height: 1200px;
+                overflow: hidden;
+            }
+            
+            @media (max-width: 768px) {
+                .form-container {
+                    height: 1400px; /* Taller on mobile */
+                }
+            }
+        </style>
+    </section>
+</body>
+</html> 
