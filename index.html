@@ -508,30 +508,37 @@
       const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbwcqkNAYae0-go42w5FCOcBc5Euw74dyANZq9yNInO33nAz5cxV8DkPp_RB4A67MSU/exec";
 
-      function fetchAvailableSpots() {
-        console.log("Fetching spots...");
-        const script = document.createElement("script");
-        const callbackName = "handleSpots_" + Date.now();
+      async function fetchAvailableSpots() {
+        try {
+          const proxyUrl = "https://corsproxy.io/?";
+          const response = await fetch(
+            proxyUrl + encodeURIComponent(SCRIPT_URL),
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const spots = await response.text();
 
-        window[callbackName] = function (response) {
-          console.log("Received response:", response);
+          // Update the spots display
           const spotsElement = document.getElementById("spotsAvailable");
-          spotsElement.textContent = response;
+          spotsElement.textContent = spots;
 
-          // Cleanup
-          document.body.removeChild(script);
-          delete window[callbackName];
-        };
-
-        script.src = SCRIPT_URL + "?callback=" + callbackName;
-        script.onerror = function () {
-          console.error("Script failed to load");
-          document.getElementById("spotsAvailable").textContent =
-            "Error loading";
-        };
-
-        document.body.appendChild(script);
+          // Update form state
+          const form = document.querySelector("form");
+          const submitButton = form.querySelector('button[type="submit"]');
+          if (parseInt(spots) <= 0) {
+            submitButton.disabled = true;
+            submitButton.textContent = "No Spots Available";
+          }
+        } catch (error) {
+          console.error("Error fetching available spots:", error);
+          document.getElementById("spotsAvailable").textContent = "Error";
+        }
       }
+
       function handleSpots(response) {
         try {
           const spotsElement = document.getElementById("spotsAvailable");
