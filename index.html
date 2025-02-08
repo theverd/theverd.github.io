@@ -508,27 +508,26 @@
       const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbwcqkNAYae0-go42w5FCOcBc5Euw74dyANZq9yNInO33nAz5cxV8DkPp_RB4A67MSU/exec";
 
-      async function fetchAvailableSpots() {
-        try {
-          const response = await fetch(SCRIPT_URL);
-          const spots = await response.text();
+      function fetchAvailableSpots() {
+        const script = document.createElement("script");
+        script.src = SCRIPT_URL + "?callback=handleSpots";
+        document.body.appendChild(script);
+      }
 
-          // Update the spots display
+      function handleSpots(response) {
+        try {
           const spotsElement = document.getElementById("spotsAvailable");
-          spotsElement.textContent = spots;
+          spotsElement.textContent = response;
 
           // Update form state
           const form = document.querySelector("form");
           const submitButton = form.querySelector('button[type="submit"]');
-          if (parseInt(spots) <= 0) {
+          if (parseInt(response) <= 0) {
             submitButton.disabled = true;
             submitButton.textContent = "No Spots Available";
-          } else {
-            submitButton.disabled = false;
-            submitButton.textContent = "Reserve Your Spot";
           }
         } catch (error) {
-          console.error("Error fetching available spots:", error);
+          console.error("Error handling spots:", error);
           document.getElementById("spotsAvailable").textContent = "Error";
         }
       }
